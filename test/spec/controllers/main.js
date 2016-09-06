@@ -24,4 +24,31 @@ describe('Controller: MainCtrl', function() {
         expect(MainCtrl.defaultReverse).toBe(false);
         expect(MainCtrl.isShowing).toBe(false);
     });
+
+//Testing the getJson function
+    describe('Get data from reddit', function() {
+
+        it('It should return data from reddit', function() {
+
+            var mockData = {
+                data: {
+                    children: [
+                        { data: 'foo' }
+                    ]
+                }
+            };
+            $httpBackend
+                .when('GET', 'https://www.reddit.com/r/worldnews/new.json').respond(
+                    function() {
+                        return [200, mockData, {}];
+                    });
+
+            MainCtrl.getJson();
+
+            $httpBackend.flush();
+
+            expect(MainCtrl.isShowing).toBeTruthy();
+
+        });
+    });
 });
