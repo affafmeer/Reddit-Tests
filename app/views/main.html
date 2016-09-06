@@ -1,0 +1,43 @@
+<style>
+   table, th , td  {
+   border: 1px solid lightblue;
+   border-collapse: collapse;
+   padding: 5px;
+   }
+   table tr:nth-child(odd) {
+   background-color: #f1f1f1;
+   }
+   table tr:nth-child(even) {
+   background-color: #ffffff;
+   }
+</style>
+<section>
+   <div class="text-center">
+      <button  ng-hide="isShowing"class="btn btn-primary" ng-click="getJson()">Let's get Started</button>
+   </div>
+   <div class="col-md-12" ng-hide=!isShowing>
+      <input class="form-control col-md-4" type="text" ng-model="customSearch" placeholder="Search" />
+   </div>
+   </br>
+   </br>
+   <table ng-hide="!isShowing" class=".table-condensed" align="center" >
+      <tr>
+         <th>No.</th>
+         <th> Author
+            <a href=# ng-click="defaultReverse = !defaultReverse" data-toggle="tooltip" data-placement="top" title="Click me to sort">
+            <small><b><span ng-show="defaultReverse">^</span>
+            <span ng-show="!defaultReverse">v</span>
+            </b></small>
+            </a>
+         </th>
+         <th>Domain</th>
+         <th>Link-Flair-Text</th>
+      </tr>
+      <tr ng-repeat="x in redditData  | orderBy : 'author': defaultReverse | filter: (customSearch.length > 1 ? customSearch : '')" >
+         <td>{{ $index + 1 }}</td>
+         <td>{{x.data.author}}</td>
+         <td>{{x.data.domain}}</td>
+         <td>{{x.data.link_flair_text}}</td>
+      </tr>
+   </table>
+</section>
