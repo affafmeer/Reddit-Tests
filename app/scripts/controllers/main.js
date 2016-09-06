@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('MainCtrl', function($scope, $http, $uibModal) {
+angular.module('myApp', ['ngAnimate']).controller('MainCtrl', function($scope, $http) {
 
     $scope.isShowing = false;
     $scope.error = '';
-    $scope.sortType = 'score';
+    $scope.sortType = 'author';
     $scope.defaultReverse = false;
 
     $scope.getJson = function() {
@@ -18,4 +18,4 @@ app.controller('MainCtrl', function($scope, $http, $uibModal) {
                  console.log(err);
             });
     };
-});
+}); 
